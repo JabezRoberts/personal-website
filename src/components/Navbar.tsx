@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Popover, Transition } from "@headleassui/react";
-import Link from "next/link"
-import const navLinks from "../constants/index.ts"
+import Link from "next/link";
+import {navLinks }from "../constants/index";
 
 
 export default function Navbar() {
     const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
-    const [scrolled, setScroled] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 
@@ -88,13 +88,8 @@ export default function Navbar() {
                                                 }`}
                                             >
                                                 {link.name}
-                                                <svg 
-                                                    className={`ml-1 h-3.5 w-3.5 tansition ${open ? "rotate-180" : ""}`}
-                                                    fill="none"
-                                                    stroke="currentColor" 
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7
+                                                <svg className={`ml-1 h-3.5 w-3.5 transition ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
                                                 </svg>
                                             </Popover.Button>
 
