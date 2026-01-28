@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import { Popover, Transition } from "@headleassui/react";
 import Link from "next/link";
 import {navLinks }from "../constants/index";
+import { Button } from "@/components";
 
 
 export default function Navbar() {
