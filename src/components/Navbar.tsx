@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
-import { Popover, Transition } from "@headlessui/react";
+import { Popover, Transition, PopoverButton, PopoverPanel } from "@headlessui/react";
 import Link from "next/link";
 import { navLinks }from "../constants/index";
 import { useTheme } from "next-themes";
@@ -90,17 +90,24 @@ export default function Navbar() {
                                 <Popover>
                                     {({ open }: { open: boolean }) => (
                                         <>
-                                            <Popover.Button
+                                            <PopoverButton
                                                 className={`flex items-center transition-colors ${open 
                                                     ? "text-accent dark:text-accent-light"
                                                     : "text-gray-700 dark:text-gray-300 hover:text-accent-light"
                                                 }`}
                                             >
                                                 {link.name}
-                                                <svg className={`ml-1 h-3.5 w-3.5 transition ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg 
+                                                    className={`ml-1 h-3.5 w-3.5 transition 
+                                                        ${open ? "rotate-180" : ""}`
+                                                    }
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
                                                 </svg>
-                                            </Popover.Button>
+                                            </PopoverButton>
 
                                             <Transition
                                                 enter="transition duration-200 ease-out"
@@ -110,18 +117,21 @@ export default function Navbar() {
                                                 leaveFrom="opacity-100 translate-y-0"
                                                 leaveTo="opacity-0 -translate-y-2"
                                             >
-                                                <Popover.Panel 
-                                                    className="absolute left-1/2 -translate-x-1/2 mt-3 w-56 rounded-2xl bg-white dark:bg-gray-900 shadow-2xl border border-gray-200 dark:border-gray-800 py-2 z-50">
+                                                <PopoverPanel 
+                                                    className="absolute left-1/2 -translate-x-1/2 mt-3 w-56 rounded-2xl bg-white 
+                                                        dark:bg-gray-900 shadow-2xl border border-gray-200 dark:border-gray-800 py-2 z-50"
+                                                >
                                                     {link.submenu!.map((sub) => (
                                                         <Link
                                                             key={sub.name}
                                                             href={sub.href}
-                                                            className="block px-5 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-accent-light"
+                                                            className="block px-5 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 
+                                                            text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-accent-light"
                                                         >
                                                             {sub.name}
                                                         </Link>
                                                     ))}
-                                                </Popover.Panel>
+                                                </PopoverPanel>
                                             </Transition>
                                         </>
                                     )}
@@ -154,8 +164,9 @@ export default function Navbar() {
                     <div className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 dark:bg-gray-700 transition-colors">
                         <button
                             onClick={handleThemeToggle}
-                            className={`absolute inline-flex h-5 w-5 items-center justify-center rounded-full bg-white dark:bg-gray-900 shadow transform transition-transform duration-200 ${
-                                theme === "dark" ? "translate-x-5" : "translate-x-0.5"
+                            className={`absolute inline-flex h-5 w-5 items-center justify-center rounded-full 
+                                bg-white dark:bg-gray-900 shadow transform transition-transform duration-200 
+                                ${theme === "dark" ? "translate-x-5" : "translate-x-0.5"
                             }`}
                             aria-label="Toggle theme"
                         >
@@ -184,7 +195,8 @@ export default function Navbar() {
 
             {/** Mobile Menu */}
             {mobileMenuOpen && (
-                <div className="md:hidden absolute top-full left-0 right-0 mt-4 rounded-xl bg-white dark:bg-gray-900 shadow-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+                <div className="md:hidden absolute top-full left-0 right-0 mt-4 rounded-xl bg-white
+                    dark:bg-gray-900 shadow-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
                     <div className="px-6 py-4 space-y-4">
                         {navLinks.map((link: NavLink) => (
                             <div key={link.name}>
