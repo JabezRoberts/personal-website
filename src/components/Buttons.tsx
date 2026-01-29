@@ -3,7 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 import type { ButtonProps } from "@/types";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib";
 
 const buttonVariants = cva(
     // Base styles (your rounded-full + shadow + transition)
