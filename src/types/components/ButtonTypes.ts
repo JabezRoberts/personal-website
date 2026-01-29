@@ -1,5 +1,8 @@
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: "primary" | "secondary" | "ghost" | "danger"
-    size?: "sm" | "md" | "lg"
-    children: React.ReactNode
+import type { VariantProps } from "class-variance-authority";
+import type { buttonVariants } from "@/components"
+
+export interface ButtonProps
+    extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+        VariantProps<typeof buttonVariants> {
+    asChild?: boolean;
 }

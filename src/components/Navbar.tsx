@@ -1,17 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { Popover, Transition } from "@headleassui/react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { Popover, Transition } from "@headlessui/react";
 import Link from "next/link";
-import {navLinks }from "../constants/index";
+import { navLinks }from "../constants/index";
+import { useTheme } from "next-themes";
 import { Button } from "@/components";
+import { NavLink } from "@/types";
 
 
 export default function Navbar() {
     const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const { theme, setTheme } = useTheme();
 
 
     useEffect(() => {
@@ -49,6 +53,10 @@ export default function Navbar() {
 
     const isShrunk = scrolled && scrollDirection === "down";
 
+    const handleThemeToggle = () => {
+        setTheme(theme === "dark" ? "light" : "dark");
+    }
+
     return (
         <header 
             className="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-300"
@@ -76,11 +84,11 @@ export default function Navbar() {
 
                 {/** Desktop Navigation */}
                 <div className="hidden md:flex items-center gap-9 text-sm font-medium">
-                    {navLinks.map((link) => (
+                    {navLinks.map((link: NavLink) => (
                         <div className="relative" key={link.name}>
                             {link.submenu ? (
                                 <Popover>
-                                    {({ open }) => (
+                                    {({ open }: { open: boolean }) => (
                                         <>
                                             <Popover.Button
                                                 className={`flex items-center transition-colors ${open 
@@ -104,7 +112,7 @@ export default function Navbar() {
                                             >
                                                 <Popover.Panel 
                                                     className="absolute left-1/2 -translate-x-1/2 mt-3 w-56 rounded-2xl bg-white dark:bg-gray-900 shadow-2xl border border-gray-200 dark:border-gray-800 py-2 z-50">
-                                                    {link.submenu.map((sub) => (
+                                                    {link.submenu!.map((sub) => (
                                                         <Link
                                                             key={sub.name}
                                                             href={sub.href}
@@ -130,17 +138,36 @@ export default function Navbar() {
                     ))}
                 </div>
 
-                {/** Hire Me */}
-                <Link
-                    href="/contact"
-                    className={`hidden md:block font-medium rounded-full transition-all duration-300 shadow-sm ${
-                        isShrunk
-                        ? "px-6 py-2.5 text-sm"
-                        : "px-7 py-3 text-base"
-                    } bg-accent text-white hover:bg-accent/90 dark:bg-accent-light dark:hover:bg-accent-light/90`}
-                >
-                    Hire Me
-                </Link>
+                {/** Right Side: Hire Me Button + Theme Toggle */}
+                <div className="hidden md:flex items-center gap-4">
+                    <Button
+                        variant="primary"
+                        size={isShrunk ? "md" : "lg"}
+                        onClick={() => {}}
+                        asChild
+                    >
+                        <Link href="/contact">Hire Me</Link>
+                    </Button>
+                    
+                    
+                    {/** Theme Toggle Switch */}
+                    <div className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 dark:bg-gray-700 transition-colors">
+                        <button
+                            onClick={handleThemeToggle}
+                            className={`absolute inline-flex h-5 w-5 items-center justify-center rounded-full bg-white dark:bg-gray-900 shadow transform transition-transform duration-200 ${
+                                theme === "dark" ? "translate-x-5" : "translate-x-0.5"
+                            }`}
+                            aria-label="Toggle theme"
+                        >
+                            {theme === "dark" ? (
+                                <Moon className="h-3.5 w-3.5 text-accent-light" />
+                            ) : (
+                                <Sun className="h-3.5 w-3.5 text-accent" />
+                            )}
+                        </button>
+                    </div>
+                </div>
+
 
                 {/** Mobile Hamburger */}
                 <button
@@ -154,17 +181,21 @@ export default function Navbar() {
                 </button>
             </nav>
 
+
             {/** Mobile Menu */}
             {mobileMenuOpen && (
                 <div className="md:hidden absolute top-full left-0 right-0 mt-4 rounded-xl bg-white dark:bg-gray-900 shadow-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
                     <div className="px-6 py-4 space-y-4">
-                        {navLinks.map((link) => (
+                        {navLinks.map((link: NavLink) => (
                             <div key={link.name}>
                                 {link.submenu ? (
                                     <>
-                                        <p className="font-medium text-gray-900 dark:text-gray-100">{link.name}</p>
+                                        <p className="font-medium text-gray-900 dark:text-gray-100">
+                                            {link.name}
+                                        </p>
+
                                         <div className="ml-4 mt-2 space-y-2">
-                                            {link.submenu.map((sub) => (
+                                            {link.submenu.map((sub: { name: string; href: string }) => (
                                                 <Link
                                                     key={sub.name}
                                                     href={sub.href}
@@ -187,16 +218,38 @@ export default function Navbar() {
                                 )}
                             </div>
                         ))}
-                        <Link
-                            href="/contact"
+
+                        <Button 
+                            variant="primary"
+                            className="w-full"
                             onClick={() => setMobileMenuOpen(false)}
-                            className="block w-full text-center px-5 py-3 bg-accent text-white font-medium rounded-full hover:bg-accent/90 dark:bg-accent-light"
+                            asChild
                         >
-                            Hire Me
-                        </Link>
+                            <Link href="/contact">Hire Me</Link>
+                        </Button>
+                        
+                        
+                        {/* Mobile Theme Toggle */}
+                        <div className="flex justify-center">
+                            <div className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 dark:bg-gray-700 transition-colors">
+                                <button
+                                    onClick={handleThemeToggle}
+                                    className={`absolute inline-flex h-5 w-5 items-center justify-center rounded-full bg-white dark:bg-gray-900 shadow transform transition-transform duration-200 ${
+                                        theme === "dark" ? "translate-x-5" : "translate-x-0.5"
+                                    }`}
+                                    aria-label="Toggle theme"
+                                >
+                                    {theme === "dark" ? (
+                                        <Moon className="h-3.5 w-3.5 text-accent-light" />
+                                    ) : (
+                                        <Sun className="h-3.5 w-3.5 text-accent" />
+                                    )}
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
         </header>
-    )    
+    );  
 }
