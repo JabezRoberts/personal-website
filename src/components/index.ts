@@ -1,2 +1,1 @@
-export * from "./Buttons"
-export * from "./Navbar"
+export * from "./UI/index"

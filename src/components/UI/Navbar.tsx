@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { Popover, Transition, PopoverButton, PopoverPanel } from "@headlessui/react";
 import Link from "next/link";
-import { navLinks }from "../constants/index";
+import { navLinks }from "@/constants";
 import { useTheme } from "next-themes";
 import { Button } from "@/components";
 import { NavLink } from "@/types";
