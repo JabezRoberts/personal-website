@@ -59,7 +59,7 @@ export default function Navbar() {
 
     return (
         <header 
-            className="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-300"
+            className="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-300 mt-7"
         >
             <nav 
                 className={`
@@ -76,7 +76,7 @@ export default function Navbar() {
                 <Link
                     href="/"
                     className={`font-bold text-brand dark:text-brand-light transition-all duration-300
-                        ${ isShrunk ? "text-2xl" : "text-[28px]" 
+                        ${ isShrunk ? "text-xl" : "text-[24px]" 
                     }`}
                 >
                     Jabez Roberts

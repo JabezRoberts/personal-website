@@ -1,3 +1,4 @@
+import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import { Inter, DM_Sans, JetBrains_Mono} from "next/font/google";
 import "./globals.css";
@@ -30,28 +31,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+      <head />
       <body
         className={`
           ${inter.variable} 
           ${dmSans.variable} 
           ${jetbrains.variable} 
           font-sans antialiased
-          bg-primary dark:bg-primary-dark text-text-primary dark:text-text-primary-dark
+          bg-background dark:bg-background-dark text-primary dark:text-primary-dark
           min-h-screen
         `}
       >
-        <Navbar  />
+        <ThemeProvider 
+          attribute="class"
+          defaultTheme="system"
+          enableSystem 
+          disableTransitionOnChange
+        >
+          <Navbar  />
 
-        {/** Main content */}
-        <main className="pt-20 md:pt-24">
-          {children}
-        </main>
+          {/** Main content */}
+          <main className="pt-20 md:pt-24">
+            {children}
+          </main>
+
+        </ThemeProvider>
       </body>
     </html>
   );
