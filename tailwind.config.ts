@@ -15,6 +15,9 @@ const config: Config = {
         primary: "#0f172a",
         "primary-dark": "#e5e7eb",
 
+        muted: "#64748b", 
+        "muted-dark": "#9ca3af",  
+
         /* Brand */
         brand: "#10002b",
         "brand-light": "#dee2e6",

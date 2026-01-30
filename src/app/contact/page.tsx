@@ -5,10 +5,10 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function ContactPage() {
-    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+    const [formData, setFormData] = useState({ name: "", email: "", subject: "General", message: "" });
     const [status, setStatus] = useState("");
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
@@ -21,7 +21,7 @@ export default function ContactPage() {
         try {
             // Example: await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) });
             setStatus("Message sent successfully!");
-            setFormData({ name: "", email: "", message: "" });
+            setFormData({ name: "", email: "", subject: "General", message: "" });
         } catch (error) {
             setStatus("Error sending message. Please try again.");
             console.error("There was an error submitting the form: ", error)
@@ -29,14 +29,15 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="min-h-screen bg-primary dark:bg-primary-dark pt-24 pb-16 px-6 md:px-12 lg:px-24">
+        <div className="min-h-screen bg-background dark:bg-background-dark pt-24 pb-16 px-6 md:px-12 lg:px-24">
             <div className="max-w-4xl mx-auto space-y-16">
+                
                 {/** Hero/Intro */}
                 <section className="text-center md:text-left space-y-6">
-                    <h1 className="text-4xl md:text-6xl font-display font-bold text-text-primary dark:text-text-primary-dark">
+                    <h1 className="text-4xl md:text-6xl font-display font-bold text-primary dark:text-primary-dark">
                         Get in <span className="text-accent dark:text-accent-light">Touch</span>
                     </h1>
-                    <p className="text-xl md:text-2xl text-text-muted dark:text-text-muted-dark max-w-2xl">
+                    <p className="text-xl md:text-2xl text-muted dark:text-muted-dark max-w-2xl">
                         Whether for job opportunities, consulting, or collaboration, I'm here to connect. Reach out via the form below or my contact details.
                     </p>
                 </section>
