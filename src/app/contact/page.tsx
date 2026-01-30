@@ -49,7 +49,7 @@ export default function ContactPage() {
                         className="space-y-6 max-w-xl mx-auto"
                     >
                         <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-text-primary dark:text-text-primary-dark mb-2">
+                            <label htmlFor="name" className="block text-sm font-medium text-primary dark:text-primary-dark mb-2">
                                 Name
                             </label>
                             <input
@@ -59,12 +59,12 @@ export default function ContactPage() {
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 rounded-lg bg-surface dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-primary dark:text-text-primary-dark focus:border-accent dark:focus:border-accent-light outline-none"
+                                className="w-full px-4 py-3 rounded-lg bg-surface dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-primary dark:text-primary-dark focus:border-accent dark:focus:border-accent-light outline-none"
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-text-primary dark:text-text-primary-dark mb-2">
+                            <label htmlFor="email" className="block text-sm font-medium text-primary dark:text-primary-dark mb-2">
                                 Email
                             </label>
                             <input
@@ -74,12 +74,32 @@ export default function ContactPage() {
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-3 rounded-lg bg-surface dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-primary dark:text-text-primary-dark focus:border-accent dark:focus:border-accent-light outline-none"
+                                className="w-full px-4 py-3 rounded-lg bg-surface dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-primary dark:text-primary-dark focus:border-accent dark:focus:border-accent-light outline-none"
                             />
                         </div>
 
+
                         <div>
-                            <label htmlFor="message" className="block text-sm font-medium text-text-primary dark:text-text-primary-dark mb-2">
+                            <label htmlFor="subject" className="block text-sm font-medium text-primary dark:text-primary-dark mb-2">
+                                Subject
+                            </label>
+                            <select
+                                id="subject"
+                                name="subject"
+                                value={formData.subject}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 rounded-lg bg-surface dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-primary dark:text-primary-dark focus:border-accent dark:focus:border-accent-light outline-none"
+                            >
+                                <option value="General">General</option>
+                                <option value="Consultation">Consultation</option>
+                                <option value="Hire">Hire</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label htmlFor="message" className="block text-sm font-medium text-primary dark:text-primary-dark mb-2">
                                 Message
                             </label>
                             <textarea
@@ -89,7 +109,7 @@ export default function ContactPage() {
                                 onChange={handleChange}
                                 required
                                 rows={6}
-                                className="w-full px-4 py-3 rounded-lg bg-surface dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-primary dark:text-text-primary-dark focus:border-accent dark:focus:border-accent-light outline-none"
+                                className="w-full px-4 py-3 rounded-lg bg-surface dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-primary dark:text-primary-dark focus:border-accent dark:focus:border-accent-light outline-none"
                             />
                         </div>
                         <Button variant="primary" type="submit" className="w-full md:w-auto">
@@ -105,12 +125,12 @@ export default function ContactPage() {
 
                 {/** Contact Details */}
                 <section className="space-y-6 text-center md:text-left">
-                    <h2 className="text-3xl font-display font-semibold text-text-primary dark:text-text-primary-dark">
+                    <h2 className="text-3xl font-display font-semibold text-primary dark:text-primary-dark">
                         Contact Information
                     </h2>
-                    <div className="space-y-4 text-lg text-text-muted dark:text-text-muted-dark">
+                    <div className="space-y-4 text-lg text-muted dark:text-muted-dark">
                         <p>
-                            <strong>Email:</strong> jabez.roberts137@gmail.com
+                            <strong>Email:</strong> info@jabezroberts.com
                         </p>
                         <p>
                             <strong>Phone:</strong> +1 876-501-4318
