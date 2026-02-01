@@ -193,13 +193,13 @@ export default function Home() {
                             />
 
                             <div className="p-6">
-                                <h3 className="text-2xl font-semibold mb-2">ReunitePath</h3>
+                                <h3 className="text-2xl font-semibold mb-2">Reunite Path</h3>
                                 <p className="text-muted dark:text-muted-dark mb-4">
                                     Disaster-response platform to reconnect families. Built with focus on UX, accessibility, and ethics.
                                 </p>
 
                                 <Button variant="ghost" asChild>
-                                    <Link href="/projects/reunitepath" className="group">
+                                    <Link href="/projects/reunite-path" className="group">
                                         View Project <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                                     </Link>
                                 </Button>
