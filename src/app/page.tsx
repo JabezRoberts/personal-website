@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components";
+import { Projects, cardVariants } from "@/constants";
 import { motion } from "framer-motion";
 import {
     ArrowRight,
@@ -163,6 +164,106 @@ export default function Home() {
             </section>
 
             {/** Key Projects */}
+            <section className="py-20 md:py-32 bg-surface dark:bg-surface-dark">
+                <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+                    {/** Section Header */}
+                    <div className="text-center mb-16 md:mb-20">
+                        <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">
+                            Featured <span className="text-accent dark:text-accent-light">Case Studies</span>
+                        </h2>
+                        <p className="text-xl text-muted dark:text-muted-dark max-w-3xl mx-auto">
+                            Real-world projects where strategy meets execution—delivering measurable growth, revenue impact, and lasting systems.
+                        </p>
+                    </div>
+
+                    {/** Projects Grid - show first 3 to 4 */}
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                        {Projects.slice(0, 3).map((project, index) => (
+                            <motion.div
+                                key={project.slug}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={cardVariants}
+                                transition={{ delay: index * 0.1 }}
+                                className="group"
+                            >
+                                <Link
+                                     href={`/projects/${project.slug}`}
+                                     className="block h-full"
+                                >
+                                    <div className="overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-background dark:bg-background-dark h-full flex flex-col">
+                                        
+                                        {/** Cover Image */}
+                                        <div className="relative aspect-[4/3] overflow-hidden">
+                                            <Image
+                                                src={project.coverImage}
+                                                alt={project.title}
+                                                fill
+                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            />
+                                            {/* Optional subtle overlay gradient */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                        </div>
+
+                                        {/** Content */}
+                                        <div className="p-6 md:p-8 flex flex-col flex-grow">
+                                            <h3 className="text-2xl font-semibold mb-3 group-hover:text-accent dark:group-hover:text-accent-light transition-colors">
+                                                {project.title}
+                                            </h3>
+
+                                            <p className="text-muted dark:text-muted-dark mb-6 line-clamp-3 flex-grow">
+                                                {project.description}
+                                            </p>
+
+                                            {/** Tags */}
+                                            <div className="flex flex-wrap gap-2 mt-auto">
+                                                {project.tags.slice(0, 3).map((tag) => (
+                                                    <span
+                                                        key={tag}
+                                                        className="text-xs px-3 py-1 rounded-full bg-surface dark:bg-surface-dark border border-gray-200 dark:border-gray-700"
+                                                    >
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                                {project.tags.length > 3 && (
+                                                    <span className="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
+                                                        +{project.tags.length - 3}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/** CTA */}
+                    <div className="mt-16 md:mt-24 text-center">
+                        <p className="text-xl md:text-2xl text-muted dark:text-muted-dark mb-8 max-w-2xl mx-auto">
+                            These are just a few examples. Explore all case studies to see how I turn complex challenges into scalable, revenue-driving solutions.
+                        </p>
+
+                        <Button variant="primary" size="lg" asChild>
+                            <Link href="/projects">
+                                View All Case Studies →
+                            </Link>
+                        </Button>
+
+                        {/** Secondary CTA  */}
+                        <p className="mt-6 text-muted dark:text-muted-dark">
+                            Ready to discuss your next project?{' '}
+                            <Link href="/contact" className="text-accent dark:text-accent-light hover:underline font-medium">
+                                Get in touch
+                            </Link>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/** OLD PROJECTS SECTION */}
             <section className="py-20 bg-surface dark:bg-surface-dark">
                 <div className="max-w-7xl mx-auto px-6">
                     <motion.h2
@@ -172,7 +273,7 @@ export default function Home() {
                         variants={fadeInVariants}
                         className="text-4xl font-display font-bold text-center mb-12"
                     >
-                        Featured Projects
+                        Featured Projects OLD
                     </motion.h2>
 
                     <div className="grid md:grid-cols-2 gap-12">

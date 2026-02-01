@@ -11,7 +11,7 @@ export default function ProjectsPage() {
                 </h1>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project) =>(
+                    {Projects.map((project) =>(
                         <Link
                             key={project.slug}
                             href={`/projects/${project.slug}`}
@@ -36,7 +36,7 @@ export default function ProjectsPage() {
                                 </p>
 
                                 <div className="flex flex-wrap gap-2">
-                                    {projects.tags.map((tag) => (
+                                    {Projects.tags.map((tag) => (
                                         <span
                                             key={tag}
                                             className="text-xs px-3 py-1 rounded-full bg-background dark:bg-background-dark border border-gray-200 dark:border-gray-700"
