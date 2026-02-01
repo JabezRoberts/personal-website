@@ -1,17 +1,16 @@
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Callout, Gallery } from '@/components';
-
+import { loadProjects } from '@/lib';
+import type { CalloutProps } from '@/types/components/CalloutTypes';
+import type { GalleryProps } from '@/types';
 export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
-    let mdxModule;
+    const mdxModule = await loadProjects(params.slug);
 
-    try {
-        mdxModule = await import(`@/content/projects/${params.slug}/page.mdx`)
-    } catch (error: unknown) {
+    if (!mdxModule) {
         notFound();
-        console.error("There was an error fetching the content: ", error)
     }
-
+    
     const { default: MDXContent, metadata } = mdxModule;
 
     if (!metadata?.title) {
@@ -61,12 +60,12 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
 
             {/** Main Content */}
             <main className="max-w-4xl mx-auto px-6 md:px-12 lg:px-24 py-16 prose dark:prose-invert prose-headings:font-display prose-headings:font-bold prose-a:text-accent dark:prose-a:text-accent-light">
-                <MDXRemote 
+                <MDXRemote
                     source={MDXContent}
                     components={{
-                        Callout,
-                        Gallery
-                    }}
+                    Callout: Callout as React.ComponentType<CalloutProps>,
+                    Gallery: Gallery as React.ComponentType<GalleryProps>,
+                    } satisfies Record<string, React.ComponentType>}
                 />
             </main>
         </div>

@@ -1,5 +1,5 @@
 export type GalleryProps = {
-    images: {
+    images?: {
         src: string;
         alt: string;
     }[];

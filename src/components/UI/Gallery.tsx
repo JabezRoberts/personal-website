@@ -7,7 +7,12 @@ import type { GalleryProps } from "@/types";
 export default function Gallery({ images }: GalleryProps) {
     const [selected, setSelected] = useState(0);
 
+    if (!images || images.length === 0) {
+        return null; // Or render a fallback UI, e.g., <p>No images available</p>
+    }
+    
     return (
+
         <div className="my-8">
             {/** Main large image */}
             <div className="relative aspect-[16/9] overflow-hidden rounded-xl shadow-lg">

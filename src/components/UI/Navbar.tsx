@@ -4,19 +4,26 @@ import { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { Popover, Transition, PopoverButton, PopoverPanel } from "@headlessui/react";
 import Link from "next/link";
-import { navLinks }from "@/constants";
+import { navLinks } from "@/constants";
 import { useTheme } from "next-themes";
 import { Button } from "@/components";
 import { NavLink } from "@/types";
-
 
 export default function Navbar() {
     const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
-    const { theme, setTheme } = useTheme();
+    const { resolvedTheme, setTheme } = useTheme();
 
+    useEffect(() => {
+        /**
+         * 
+        */
+       // eslint-disable-next-line
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         let lastScrollY = window.scrollY;
@@ -25,7 +32,6 @@ export default function Navbar() {
         const updateScroll = () => {
             const currentScrollY = window.scrollY;
             setScrolled(currentScrollY > 20);
-
 
             if (currentScrollY > lastScrollY) {
                 setScrollDirection("down");
@@ -44,18 +50,36 @@ export default function Navbar() {
             }
         };
 
-
         window.addEventListener("scroll", requestTick, { passive: true });
         
-        return () => window.removeEventListener("scroll", requestTick)
+        return () => window.removeEventListener("scroll", requestTick);
     }, []);
-
 
     const isShrunk = scrolled && scrollDirection === "down";
 
     const handleThemeToggle = () => {
-        setTheme(theme === "dark" ? "light" : "dark");
-    }
+        setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    };
+
+    const themeToggle = (
+        <div className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 dark:bg-gray-700 transition-colors">
+            <button
+                onClick={handleThemeToggle}
+                className={`absolute inline-flex h-5 w-5 items-center justify-center rounded-full 
+                    bg-white dark:bg-gray-900 shadow transform transition-transform duration-200 
+                    ${resolvedTheme === "dark" ? "translate-x-5" : "translate-x-0.5"}`}
+                aria-label="Toggle theme"
+            >
+                {resolvedTheme === "dark" ? (
+                    <Moon className="h-3.5 w-3.5 text-accent-light" />
+                ) : (
+                    <Sun className="h-3.5 w-3.5 text-accent" />
+                )}
+            </button>
+        </div>
+    );
+
+    const themeTogglePlaceholder = <div className="h-6 w-11" />;
 
     return (
         <header 
@@ -76,8 +100,7 @@ export default function Navbar() {
                 <Link
                     href="/"
                     className={`font-bold text-brand dark:text-brand-light transition-all duration-300
-                        ${ isShrunk ? "text-xl" : "text-[24px]" 
-                    }`}
+                        ${isShrunk ? "text-xl" : "text-[24px]"}`}
                 >
                     Jabez Roberts
                 </Link>
@@ -93,14 +116,12 @@ export default function Navbar() {
                                             <PopoverButton
                                                 className={`flex items-center transition-colors ${open 
                                                     ? "text-accent dark:text-accent-light"
-                                                    : "text-gray-700 dark:text-gray-300 hover:text-accent-light"
-                                                }`}
+                                                    : "text-gray-700 dark:text-gray-300 hover:text-accent-light"}`}
                                             >
                                                 {link.name}
                                                 <svg 
                                                     className={`ml-1 h-3.5 w-3.5 transition 
-                                                        ${open ? "rotate-180" : ""}`
-                                                    }
+                                                        ${open ? "rotate-180" : ""}`}
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"
@@ -159,26 +180,9 @@ export default function Navbar() {
                         <Link href="/contact">Hire Me</Link>
                     </Button>
                     
-                    
                     {/** Theme Toggle Switch */}
-                    <div className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 dark:bg-gray-700 transition-colors">
-                        <button
-                            onClick={handleThemeToggle}
-                            className={`absolute inline-flex h-5 w-5 items-center justify-center rounded-full 
-                                bg-white dark:bg-gray-900 shadow transform transition-transform duration-200 
-                                ${theme === "dark" ? "translate-x-5" : "translate-x-0.5"
-                            }`}
-                            aria-label="Toggle theme"
-                        >
-                            {theme === "dark" ? (
-                                <Moon className="h-3.5 w-3.5 text-accent-light" />
-                            ) : (
-                                <Sun className="h-3.5 w-3.5 text-accent" />
-                            )}
-                        </button>
-                    </div>
+                    {mounted ? themeToggle : themeTogglePlaceholder}
                 </div>
-
 
                 {/** Mobile Hamburger */}
                 <button
@@ -191,7 +195,6 @@ export default function Navbar() {
                     }
                 </button>
             </nav>
-
 
             {/** Mobile Menu */}
             {mobileMenuOpen && (
@@ -240,24 +243,9 @@ export default function Navbar() {
                             <Link href="/contact">Hire Me</Link>
                         </Button>
                         
-                        
                         {/* Mobile Theme Toggle */}
                         <div className="flex justify-center">
-                            <div className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 dark:bg-gray-700 transition-colors">
-                                <button
-                                    onClick={handleThemeToggle}
-                                    className={`absolute inline-flex h-5 w-5 items-center justify-center rounded-full bg-white dark:bg-gray-900 shadow transform transition-transform duration-200 ${
-                                        theme === "dark" ? "translate-x-5" : "translate-x-0.5"
-                                    }`}
-                                    aria-label="Toggle theme"
-                                >
-                                    {theme === "dark" ? (
-                                        <Moon className="h-3.5 w-3.5 text-accent-light" />
-                                    ) : (
-                                        <Sun className="h-3.5 w-3.5 text-accent" />
-                                    )}
-                                </button>
-                            </div>
+                            {mounted ? themeToggle : themeTogglePlaceholder}
                         </div>
                     </div>
                 </div>

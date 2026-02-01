@@ -176,7 +176,7 @@ export default function Home() {
                         </p>
                     </div>
 
-                    {/** Projects Grid - show first 3 to 4 */}
+                    {/** Projects Grid - show first 3 */}
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
                         {Projects.slice(0, 3).map((project, index) => (
                             <motion.div
@@ -263,81 +263,6 @@ export default function Home() {
                 </div>
             </section>
 
-            {/** OLD PROJECTS SECTION */}
-            <section className="py-20 bg-surface dark:bg-surface-dark">
-                <div className="max-w-7xl mx-auto px-6">
-                    <motion.h2
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeInVariants}
-                        className="text-4xl font-display font-bold text-center mb-12"
-                    >
-                        Featured Projects OLD
-                    </motion.h2>
-
-                    <div className="grid md:grid-cols-2 gap-12">
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            variants={fadeInVariants}
-                            whileHover={cardHover}
-                            className="bg-background dark:bg-background-dark rounded-2xl overflow-hidden shadow-xl"
-                        >
-                            <Image
-                                src="/favicon.ico"
-                                alt="ReunitePath App"
-                                width={800}
-                                height={600}
-                                className="w-full h-64 object-cover"
-                            />
-
-                            <div className="p-6">
-                                <h3 className="text-2xl font-semibold mb-2">Reunite Path</h3>
-                                <p className="text-muted dark:text-muted-dark mb-4">
-                                    Disaster-response platform to reconnect families. Built with focus on UX, accessibility, and ethics.
-                                </p>
-
-                                <Button variant="ghost" asChild>
-                                    <Link href="/projects/reunite-path" className="group">
-                                        View Project <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                    </Link>
-                                </Button>
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            variants={fadeInVariants}
-                            transition={{ delay: 0.2 }}
-                            whileHover={cardHover}
-                            className="bg-background dark:bg-background-dark rounded-2xl overflow-hidden shadow-xl"
-                        >
-                            <Image
-                                src="/favicon.ico"
-                                alt="Renaros Dashboard"
-                                width={750}
-                                height={469}
-                                className="w-full h-64 object-cover"
-                            />
-                            <div className="p-6">
-                                <h3 className="text-2xl font-semibold mb-2">Renaros</h3>
-                                <p className="text-muted dark:text-muted-dark mb-4">
-                                    AI-powered SaaS for small businesses. Multi-tenant, RBAC, Supabase backend, Next.js frontend.
-                                </p>
-                                <Button variant="ghost" asChild>
-                                    <Link href="/projects/renaros" className="group">
-                                        View Project <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                    </Link>
-                                </Button>
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
 
             {/** Call to Action */}
             <section className="py-20 text-center">
