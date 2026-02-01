@@ -36,7 +36,7 @@ export default function ProjectsPage() {
                                 </p>
 
                                 <div className="flex flex-wrap gap-2">
-                                    {Projects.tags.map((tag) => (
+                                    {project.tags.map((tag: string) => (
                                         <span
                                             key={tag}
                                             className="text-xs px-3 py-1 rounded-full bg-background dark:bg-background-dark border border-gray-200 dark:border-gray-700"
