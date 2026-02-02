@@ -40,7 +40,6 @@ export default function Home() {
     return (
         <div className="bg-background dark:bg-background-dark text-primary dark:text-primary-dark">
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-brand/10 dark:from-accent-light/10 dark:to-brand-light/10" />
                 <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
                     <motion.h1
                         initial="hidden"
